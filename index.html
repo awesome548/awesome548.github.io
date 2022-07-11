@@ -1,15 +1,4 @@
 <html>
-  
-  <style type="button/css">button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  }</style> 
   <head>
     <title>DeviceMotion Test</title>
   </head>
@@ -21,6 +10,8 @@
       <span id="z">0</span>
     </div>
     <script>
+      var array_x, array_y, array_z = [];
+      var count = 0;
       function deviceMotionRequest () {
         if (DeviceMotionEvent.requestPermission) {
           DeviceMotionEvent.requestPermission()
@@ -31,9 +22,19 @@
                     alert('event.accelerationIncludingGravity is null');
                     return;
                   }
-                  document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x;
-                  document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y;
-                  document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z;
+                  if (count < 128) {
+                    array_x.push(event.accelerationIncludingGravity.x);
+                    array_y.push(event.accelerationIncludingGravity.y);
+                    array_z.push(event.accelerationIncludingGravity.z);
+                    count += 1;
+                  } else {
+                    // Call python program here!
+
+                    array_x = [];
+                    array_y = [];
+                    array_z = [];
+                    count = 0;
+                  }
                 })
               }
             })
