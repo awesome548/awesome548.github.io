@@ -22,6 +22,9 @@
                     alert('event.accelerationIncludingGravity is null');
                     return;
                   }
+                  document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x;
+                  document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y;
+                  document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z;
                   if (count < 128) {
                     array_x.push(event.accelerationIncludingGravity.x);
                     array_y.push(event.accelerationIncludingGravity.y);
